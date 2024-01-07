@@ -32,9 +32,9 @@ class CourseItemDetails extends Component {
     const {params} = match
     const {id} = params
     const response = await fetch(`https://apis.ccbp.in/te/courses/${id}`)
-    const data = await response.json()
-    const updatedData = this.getFormattedData(data.course_details)
     if (response.ok === true) {
+      const data = await response.json()
+      const updatedData = this.getFormattedData(data.course_details)
       this.setState({
         course: updatedData,
         apiStatus: apiStatusConstants.success,
@@ -64,6 +64,10 @@ class CourseItemDetails extends Component {
     )
   }
 
+  getCoursesList = () => {
+    this.getCourseData()
+  }
+
   failureView = () => (
     <div className="failure-container">
       <img
@@ -78,7 +82,7 @@ class CourseItemDetails extends Component {
       <button
         type="button"
         className="retry-button"
-        onClick={this.getCourseData}
+        onClick={this.getCoursesList}
       >
         Retry
       </button>
@@ -105,3 +109,4 @@ class CourseItemDetails extends Component {
 }
 
 export default CourseItemDetails
+
