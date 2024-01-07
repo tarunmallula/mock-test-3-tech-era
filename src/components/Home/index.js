@@ -23,13 +23,13 @@ class Home extends Component {
   getCoursesData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const response = await fetch('https://apis.ccbp.in/te/courses')
-    const data = await response.json()
-    const updatedData = data.courses.map(eachItem => ({
-      id: eachItem.id,
-      name: eachItem.name,
-      logoUrl: eachItem.logo_url,
-    }))
     if (response.ok === true) {
+      const data = await response.json()
+      const updatedData = data.courses.map(eachItem => ({
+        id: eachItem.id,
+        name: eachItem.name,
+        logoUrl: eachItem.logo_url,
+      }))
       this.setState({
         coursesData: updatedData,
         apiStatus: apiStatusConstants.success,
@@ -95,6 +95,12 @@ class Home extends Component {
   }
 
   render() {
+    return <div className="bg-container">{this.renderViews()}</div>
+  }
+}
+
+export default Home
+
     return <div className="bg-container">{this.renderViews()}</div>
   }
 }
